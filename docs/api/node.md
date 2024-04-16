@@ -946,7 +946,7 @@ If the `Z-Wave+` Command Class is supported, this returns the `Z-Wave+` node typ
 
 ```ts
 enum ZWavePlusNodeType {
-	Node = 0,
+	Node = 0, // ZWave+ Node
 	IPGateway = 2,
 }
 ```
@@ -1559,7 +1559,7 @@ interface NodeStatistics {
 ```ts
 interface RouteStatistics {
 	/** The protocol and used data rate for this route */
-	protocolDataRate: ProtocolDataRate;
+	protocolDataRate?: ProtocolDataRate;
 	/** Which nodes are repeaters for this route */
 	repeaters: number[];
 

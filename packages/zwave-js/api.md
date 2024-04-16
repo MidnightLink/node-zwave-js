@@ -350,12 +350,15 @@ export class Driver extends TypedEventEmitter<DriverEventCallbacks> implements Z
         local?: boolean;
         remote?: boolean;
     }): Promise<string[]>;
+    // (undocumented)
+    exceedsMaxPayloadLength(msg: SendDataMessage): boolean;
     getConservativeWaitTimeAfterFirmwareUpdate(advertisedWaitTime: number | undefined): number;
     // (undocumented)
     getDeviceConfig(nodeId: number): DeviceConfig | undefined;
     // (undocumented)
     getHighestSecurityClass(nodeId: number): MaybeNotKnown<SecurityClass_2>;
     getLogConfig(): LogConfig;
+    getMaxPayloadLength(msg: SendDataMessage): number;
     readonly getNextCallbackId: () => number;
     getNextSupervisionSessionId(nodeId: number): number;
     readonly getNextTransportServiceSessionId: () => number;
@@ -552,6 +555,7 @@ export class Endpoint implements IZWaveEndpoint {
     get userIcon(): MaybeNotKnown<number>;
     // Warning: (ae-unresolved-link) The @link reference could not be resolved: The package "zwave-js" does not have an export "IZWaveEndpoint"
     readonly virtual = false;
+    wasCCRemovedViaConfig(cc: CommandClasses_2): boolean;
 }
 
 export { EntryControlDataTypes }
@@ -975,7 +979,7 @@ export { RouteProtocolDataRate }
 //
 // @public (undocumented)
 export interface RouteStatistics {
-    protocolDataRate: ProtocolDataRate_2;
+    protocolDataRate?: ProtocolDataRate_2;
     repeaterRSSI?: RSSI_2[];
     repeaters: number[];
     routeFailedBetween?: [number, number];
@@ -1255,6 +1259,8 @@ export class ZWaveController extends TypedEventEmitter<ControllerEventCallbacks>
     get isUsingHomeIdFromOtherNetwork(): MaybeNotKnown<boolean>;
     // (undocumented)
     get manufacturerId(): MaybeNotKnown<number>;
+    get maxPayloadSize(): MaybeNotKnown<number>;
+    get maxPayloadSizeLR(): MaybeNotKnown<number>;
     get nodeIdType(): NodeIDType;
     get nodes(): ReadonlyThrowingMap<number, ZWaveNode>;
     // (undocumented)
@@ -1782,6 +1788,21 @@ export interface ZWaveOptions extends ZWaveHostOptions {
 
 
 export * from "@zwave-js/cc";
+
+// Warnings were encountered during analysis:
+//
+// src/lib/controller/Controller.ts:788:2 - (ae-missing-getter) The property "provisioningList" has a setter but no getter.
+// src/lib/driver/Driver.ts:690:24 - (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
+// src/lib/driver/Driver.ts:4070:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+// src/lib/driver/Driver.ts:5130:2 - (ae-unresolved-link) The @link reference could not be resolved: The package "zwave-js" does not have an export "drainSerialAPIQueue"
+// src/lib/driver/Driver.ts:5533:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+// src/lib/driver/Driver.ts:5534:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+// src/lib/driver/Driver.ts:5576:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+// src/lib/driver/Driver.ts:5577:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+// src/lib/driver/Driver.ts:5713:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
+// src/lib/node/Node.ts:913:2 - (ae-missing-getter) The property "associations" has a setter but no getter.
+// src/lib/node/Node.ts:1004:2 - (ae-missing-getter) The property "deviceConfigHash" has a setter but no getter.
+// src/lib/node/Node.ts:2893:5 - (tsdoc-param-tag-missing-hyphen) The @param block should be followed by a parameter name and then a hyphen
 
 // (No @packageDocumentation comment for this package)
 

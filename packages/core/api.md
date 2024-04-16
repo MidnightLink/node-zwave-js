@@ -484,7 +484,7 @@ export enum ConfigValueFormat {
     // (undocumented)
     Enumerated = 2,
     // (undocumented)
-    SignedInteger = 0,
+    SignedInteger = 0,// UnsignedInt, Radio Buttons
     // (undocumented)
     UnsignedInteger = 1
 }
@@ -504,15 +504,15 @@ export const CONTROLLER_LABEL = "CNTRLR";
 // @public (undocumented)
 export enum ControllerCapabilityFlags {
     // (undocumented)
-    NoNodesIncluded = 32,
+    NoNodesIncluded = 32,// Controller is a secondary
     // (undocumented)
-    OnOtherNetwork = 2,
+    OnOtherNetwork = 2,// Controller is using a home ID from another network
     // (undocumented)
-    Secondary = 1,
+    Secondary = 1,// There's a SUC id server (SIS) on the network
     // (undocumented)
-    SISPresent = 4,
+    SISPresent = 4,// Before the SIS was added, the controller was the primary
     // (undocumented)
-    SUC = 16,
+    SUC = 16,// Controller is a static update controller (SUC)
     // (undocumented)
     WasRealPrimary = 8
 }
@@ -1464,7 +1464,7 @@ export type LogValueArgs<T> = T & {
 // @public (undocumented)
 export enum LongRangeChannel {
     // (undocumented)
-    A = 1,
+    A = 1,// Reserved
     // (undocumented)
     B = 2,
     // (undocumented)
@@ -3488,6 +3488,8 @@ export interface ZWaveLogInfo<TContext extends LogContext = LogContext> extends 
 
 // Warnings were encountered during analysis:
 //
+// src/security/Manager2.ts:116:79 - (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
+// src/security/Manager2.ts:116:98 - (tsdoc-escape-greater-than) The ">" character should be escaped using a backslash to avoid confusion with an HTML tag
 // src/security/QR.ts:99:3 - (ae-unresolved-link) The @link reference could not be resolved: The package "@zwave-js/core" does not have an export "requestedSecurityClasses"
 
 // (No @packageDocumentation comment for this package)
